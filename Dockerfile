@@ -30,10 +30,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /tmp/doxygen-1.10.0/build/bin/doxygen /usr/local/bin/
 COPY --from=builder /tmp/plantuml-lgpl-1.2024.4.jar /usr/local/bin/plantuml.jar
+RUN PATH=${PATH}:/usr/local/bin
 
 # User management
 RUN groupadd -g 1000 cmonkey && useradd -u 1000 -g 1000 -ms /bin/bash cmonkey
-RUN PATH=${PATH}:/usr/local/bin 
 
 USER cmonkey
 
